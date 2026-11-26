@@ -1,9 +1,11 @@
-// out-of-office — next-round entry (round 5).
-// The one-line auto-reply lives in entry.txt; this script prints it.
-// Hard reversal: the promised help is deletion, unread.
-import { readFile } from "node:fs/promises";
+// out-of-office — round 5 entry (rewritten for the next blind round).
+// Prints the one-line auto-reply stored in entry.txt.
+// The replacement deletes the mail unread.
+import { readFileSync } from "node:fs";
 
-const entryUrl = new URL("./entry.txt", import.meta.url);
-const raw = await readFile(entryUrl, "utf8");
-const entry = raw.trim();
-process.stdout.write(entry + "\n");
+function printEntry(): void {
+  const text = readFileSync(new URL("./entry.txt", import.meta.url), "utf8");
+  console.log(text.trim());
+}
+
+printEntry();
